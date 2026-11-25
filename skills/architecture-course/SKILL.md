@@ -3,7 +3,7 @@ name: architecture-course
 description: "Build an animated, step-through course page that explains how a system works: lesson outline on the left, isometric diagram with moving packets and a step timeline in the middle, explanation on the right. Every step is tied to a real line of code. Use when someone asks for an architecture walkthrough, an animated or interactive system diagram, a system design explainer, or 'show how X works step by step'."
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
 ---
 
 # Architecture course

@@ -10,17 +10,17 @@ Every step points at a real line of code, and the build stops if that line is go
 - **Shows failure too.** The normal path and what goes wrong share one diagram.
 - **Checked in a browser.** Every step at desktop, tablet and phone size, plus both themes and reduced motion.
 
-## Install version 1.0.0
+## Install version 1.0.1
 
 Run this in a Bash shell:
 
 ```bash
-git clone --branch v1.0.0 --depth 1 https://github.com/gblack686/architecture-course
+git clone --branch v1.0.1 --depth 1 https://github.com/gblack686/architecture-course
 mkdir -p ~/.claude/skills
 cp -r architecture-course/skills/architecture-course ~/.claude/skills/
 ```
 
-The [release page](https://github.com/gblack686/architecture-course/releases/tag/v1.0.0) lists the exact
+The [release page](https://github.com/gblack686/architecture-course/releases/tag/v1.0.1) lists the exact
 commit and a zip with its SHA-256. Then ask Claude Code: *"Make an architecture course of how login works in
 this repo."* The skill is plain Markdown and scripts, so other agents can use it too.
 
