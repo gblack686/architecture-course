@@ -1,0 +1,886 @@
+{
+ "schema": "gbauto.arch-scene.v1",
+ "id": "how-it-works",
+ "title": "How a course is built",
+ "zones": [
+  {
+   "id": "build",
+   "title": "build_course.py",
+   "x": [
+    2.4,
+    9.6
+   ],
+   "y": [
+    -7,
+    1.6
+   ]
+  }
+ ],
+ "nodes": [
+  {
+   "id": "author",
+   "label": "Author",
+   "sub": "person or agent",
+   "x": 0,
+   "y": 4,
+   "shape": "slab",
+   "tone": "terracotta",
+   "icon": "chat"
+  },
+  {
+   "id": "course",
+   "label": "Course folder",
+   "sub": "JSON files",
+   "x": 4,
+   "y": 4,
+   "shape": "disk",
+   "tone": "amber",
+   "icon": "file"
+  },
+  {
+   "id": "scene",
+   "label": "Scene checks",
+   "sub": "can it be drawn?",
+   "x": 4,
+   "y": 0,
+   "shape": "block",
+   "tone": "red",
+   "icon": "shield"
+  },
+  {
+   "id": "source",
+   "label": "Source check",
+   "sub": "is the line there?",
+   "x": 8,
+   "y": 0,
+   "shape": "block",
+   "tone": "red",
+   "icon": "search"
+  },
+  {
+   "id": "repo",
+   "label": "Git repository",
+   "sub": "at one commit",
+   "x": 12,
+   "y": 0,
+   "shape": "disk",
+   "tone": "green",
+   "icon": "branch"
+  },
+  {
+   "id": "render",
+   "label": "Renderer",
+   "sub": "fills the page",
+   "x": 8,
+   "y": -4,
+   "shape": "block",
+   "tone": "blue",
+   "icon": "spark"
+  },
+  {
+   "id": "page",
+   "label": "index.html",
+   "sub": "one file",
+   "x": 12,
+   "y": -4,
+   "shape": "disk",
+   "tone": "blue",
+   "icon": "file"
+  },
+  {
+   "id": "browser",
+   "label": "Browser checks",
+   "sub": "three screen sizes",
+   "x": 12,
+   "y": -8,
+   "shape": "block",
+   "tone": "amber",
+   "icon": "check"
+  },
+  {
+   "id": "reader",
+   "label": "Reader",
+   "sub": "any browser",
+   "x": 16,
+   "y": -4,
+   "shape": "slab",
+   "tone": "stone",
+   "icon": "phone"
+  }
+ ],
+ "edges": [
+  {
+   "id": "author-course",
+   "from": "author",
+   "to": "course"
+  },
+  {
+   "id": "course-scene",
+   "from": "course",
+   "to": "scene"
+  },
+  {
+   "id": "scene-source",
+   "from": "scene",
+   "to": "source"
+  },
+  {
+   "id": "source-repo",
+   "from": "source",
+   "to": "repo"
+  },
+  {
+   "id": "source-render",
+   "from": "source",
+   "to": "render"
+  },
+  {
+   "id": "render-page",
+   "from": "render",
+   "to": "page"
+  },
+  {
+   "id": "page-browser",
+   "from": "page",
+   "to": "browser"
+  },
+  {
+   "id": "page-reader",
+   "from": "page",
+   "to": "reader"
+  },
+  {
+   "id": "scene-author",
+   "from": "scene",
+   "to": "author",
+   "via": [
+    [
+     0,
+     0
+    ]
+   ]
+  }
+ ],
+ "tracks": [
+  {
+   "id": "built",
+   "label": "How a course gets built",
+   "subtitle": "Follow one course from a folder of JSON to a page a reader can open.",
+   "tags": [
+    "Normal path"
+   ],
+   "learn": [
+    {
+     "text": "What the author writes",
+     "step": 2
+    },
+    {
+     "text": "What is refused before drawing",
+     "step": 4
+    },
+    {
+     "text": "How a step is tied to code",
+     "step": 6
+    },
+    {
+     "text": "What the browser check proves",
+     "step": 8
+    }
+   ],
+   "metrics": [
+    {
+     "id": "where",
+     "label": "Where it is"
+    },
+    {
+     "id": "written",
+     "label": "Page written"
+    },
+    {
+     "id": "result",
+     "label": "Result"
+    }
+   ],
+   "steps": [
+    {
+     "short": "The map",
+     "phase": "Setup",
+     "title": "A folder of JSON becomes one checked page",
+     "body": [
+      "The author describes a system as boxes, lines and steps. The builder checks it, finds the cited code, and writes one page.",
+      "A browser check then opens every step, the way a reader would."
+     ],
+     "focus": "all",
+     "hops": [
+      {
+       "e": "author-course"
+      },
+      {
+       "e": "course-scene"
+      },
+      {
+       "e": "scene-source"
+      },
+      {
+       "e": "source-render"
+      },
+      {
+       "e": "render-page"
+      },
+      {
+       "e": "page-browser"
+      }
+     ],
+     "sources": [
+      {
+       "repo": "architecture-course",
+       "path": "skills/architecture-course/scripts/build_course.py",
+       "anchor": "Build one standalone architecture course page"
+      }
+     ],
+     "metrics": {
+      "where": "Author",
+      "written": "no",
+      "result": "not started"
+     },
+     "idea": {
+      "kind": "idea",
+      "text": "The picture is data. The drawing code never changes between courses."
+     }
+    },
+    {
+     "short": "Write",
+     "phase": "Setup",
+     "title": "The author writes a course and its scenes",
+     "body": "One file lists the chapters. Each scene holds the map and its lessons, so the normal path and its failures share a drawing.",
+     "focus": [
+      "author",
+      "course"
+     ],
+     "hops": [
+      {
+       "e": "author-course",
+       "label": "course.json"
+      }
+     ],
+     "sources": [
+      {
+       "repo": "architecture-course",
+       "path": "skills/architecture-course/SKILL.md",
+       "anchor": "a folder with `course.json` plus `scenes/*.json`"
+      }
+     ],
+     "metrics": {
+      "where": "Course folder",
+      "written": "no",
+      "result": "not started"
+     },
+     "idea": {
+      "kind": "tip",
+      "text": "Start from the code, not from memory."
+     },
+     "changes": [
+      {
+       "op": "add",
+       "text": "A course folder"
+      }
+     ]
+    },
+    {
+     "short": "Load",
+     "phase": "Detail",
+     "title": "The builder reads only inside the folder",
+     "body": "Each chapter names its scene. A scene path that points outside the course folder stops the build.",
+     "focus": [
+      "course",
+      "scene"
+     ],
+     "hops": [
+      {
+       "e": "course-scene",
+       "label": "scenes"
+      }
+     ],
+     "sources": [
+      {
+       "repo": "architecture-course",
+       "path": "skills/architecture-course/scripts/build_course.py",
+       "anchor": "if not scene_path.is_relative_to(folder.resolve()):"
+      }
+     ],
+     "metrics": {
+      "where": "Scene checks",
+      "written": "no",
+      "result": "reading"
+     },
+     "idea": {
+      "kind": "idea",
+      "text": "A course cannot pull in a file from somewhere else."
+     }
+    },
+    {
+     "short": "Can it be drawn?",
+     "phase": "Detail",
+     "title": "Every name in a step must exist on the map",
+     "body": "Unknown boxes, unknown lines and icons that do not exist are collected and reported together, so one run shows them all.",
+     "focus": [
+      "course",
+      "scene",
+      "source"
+     ],
+     "hops": [
+      {
+       "e": "course-scene",
+       "label": "steps"
+      },
+      {
+       "e": "scene-source",
+       "label": "drawable",
+       "kind": "ok"
+      }
+     ],
+     "sources": [
+      {
+       "repo": "architecture-course",
+       "path": "skills/architecture-course/scripts/build_course.py",
+       "anchor": "def check_scene(scene"
+      },
+      {
+       "repo": "architecture-course",
+       "path": "skills/architecture-course/scripts/build_course.py",
+       "anchor": "unknown edge {hop.get("
+      }
+     ],
+     "metrics": {
+      "where": "Scene checks",
+      "written": "no",
+      "result": {
+       "v": "drawable",
+       "tone": "good"
+      }
+     },
+     "idea": {
+      "kind": "tip",
+      "text": "A moving packet must also stay between boxes that are in view."
+     },
+     "tags": {
+      "scene": {
+       "t": "no problems",
+       "tone": "green"
+      }
+     }
+    },
+    {
+     "short": "Pin the code",
+     "phase": "Detail",
+     "title": "Each repository is fixed to one commit",
+     "body": "The builder turns the given version into an exact commit first. Everything it reads afterwards comes from that commit.",
+     "focus": [
+      "source",
+      "repo"
+     ],
+     "hops": [
+      {
+       "e": "source-repo",
+       "label": "which commit?"
+      },
+      {
+       "e": "source-repo",
+       "label": "commit id",
+       "kind": "ok",
+       "r": 1
+      }
+     ],
+     "sources": [
+      {
+       "repo": "architecture-course",
+       "path": "skills/architecture-course/scripts/build_course.py",
+       "anchor": "\"rev-parse\", \"--verify\", rev + \"^{commit}\""
+      }
+     ],
+     "metrics": {
+      "where": "Source check",
+      "written": "no",
+      "result": "pinning"
+     },
+     "idea": {
+      "kind": "warn",
+      "text": "Changes that are not committed are not seen."
+     },
+     "changes": [
+      {
+       "op": "add",
+       "text": "An exact commit for each repository"
+      }
+     ]
+    },
+    {
+     "short": "Find the line",
+     "phase": "Solution",
+     "title": "Every step must point at a real line",
+     "body": "The step gives a piece of exact text. The builder finds the first line that contains it and records the number, so nobody types line numbers by hand.",
+     "focus": [
+      "source",
+      "repo"
+     ],
+     "hops": [
+      {
+       "e": "source-repo",
+       "label": "file and text"
+      },
+      {
+       "e": "source-repo",
+       "label": "line number",
+       "kind": "ok",
+       "r": 1
+      }
+     ],
+     "sources": [
+      {
+       "repo": "architecture-course",
+       "path": "skills/architecture-course/scripts/build_course.py",
+       "anchor": "line = next((n for n, text in enumerate("
+      }
+     ],
+     "metrics": {
+      "where": "Source check",
+      "written": "no",
+      "result": {
+       "v": "found",
+       "tone": "good"
+      }
+     },
+     "idea": {
+      "kind": "idea",
+      "text": "When the code moves, the next build updates the number."
+     },
+     "changes": [
+      {
+       "op": "add",
+       "text": "A line number for each step"
+      }
+     ],
+     "tags": {
+      "source": {
+       "t": "line found",
+       "tone": "green"
+      }
+     }
+    },
+    {
+     "short": "Render",
+     "phase": "Detail",
+     "title": "The course is placed in the page as data",
+     "body": "Styles, drawing code and the course go into one template in a single pass. The less-than sign is stored as a code, so course text cannot close the script.",
+     "focus": [
+      "source",
+      "render",
+      "page"
+     ],
+     "hops": [
+      {
+       "e": "source-render",
+       "label": "course"
+      },
+      {
+       "e": "render-page",
+       "label": "one file",
+       "kind": "ok"
+      }
+     ],
+     "sources": [
+      {
+       "repo": "architecture-course",
+       "path": "skills/architecture-course/scripts/build_course.py",
+       "anchor": "# One pass, so text inside a value is never treated as a placeholder."
+      },
+      {
+       "repo": "architecture-course",
+       "path": "skills/architecture-course/scripts/build_course.py",
+       "anchor": "never appears raw"
+      }
+     ],
+     "metrics": {
+      "where": "Renderer",
+      "written": {
+       "v": "yes",
+       "tone": "good"
+      },
+      "result": {
+       "v": "built",
+       "tone": "good"
+      }
+     },
+     "idea": {
+      "kind": "tip",
+      "text": "The page needs no server. Fonts come from Google, with a fallback offline."
+     },
+     "changes": [
+      {
+       "op": "add",
+       "text": "index.html"
+      }
+     ]
+    },
+    {
+     "short": "Try it",
+     "phase": "Solution",
+     "title": "A real browser walks every step",
+     "body": "Labels, text size, sideways scrolling and packets are tested on every step at desktop, tablet and phone size.",
+     "focus": [
+      "page",
+      "browser"
+     ],
+     "hops": [
+      {
+       "e": "page-browser",
+       "label": "every step"
+      },
+      {
+       "e": "page-browser",
+       "label": "results",
+       "kind": "ok",
+       "r": 1
+      }
+     ],
+     "sources": [
+      {
+       "repo": "architecture-course",
+       "path": "skills/architecture-course/scripts/check_course.py",
+       "anchor": "def walk(page, label"
+      },
+      {
+       "repo": "architecture-course",
+       "path": "skills/architecture-course/scripts/check_course.py",
+       "anchor": "Labels in focus: inside the canvas"
+      }
+     ],
+     "metrics": {
+      "where": "Browser checks",
+      "written": {
+       "v": "yes",
+       "tone": "good"
+      },
+      "result": {
+       "v": "checked",
+       "tone": "good"
+      }
+     },
+     "idea": {
+      "kind": "warn",
+      "text": "It cannot tell whether the story is true. A person still reads it."
+     },
+     "tags": {
+      "browser": {
+       "t": "all pass",
+       "tone": "green"
+      }
+     }
+    },
+    {
+     "short": "Read",
+     "phase": "Recap",
+     "title": "The reader steps through it, with the code beside it",
+     "body": "Next and Back move one step at a time. Each step shows where it is in the code and has its own link.",
+     "focus": [
+      "page",
+      "reader"
+     ],
+     "hops": [
+      {
+       "e": "page-reader",
+       "label": "index.html",
+       "kind": "ok"
+      }
+     ],
+     "sources": [
+      {
+       "repo": "architecture-course",
+       "path": "skills/architecture-course/assets/page.html",
+       "anchor": "Where this is in the code"
+      }
+     ],
+     "metrics": {
+      "where": "Reader",
+      "written": {
+       "v": "yes",
+       "tone": "good"
+      },
+      "result": {
+       "v": "checked",
+       "tone": "good"
+      }
+     },
+     "idea": {
+      "kind": "next",
+      "text": "Next: what happens when the code has moved on."
+     }
+    }
+   ]
+  },
+  {
+   "id": "stale",
+   "label": "When the code has moved on",
+   "subtitle": "What happens when a cited line is gone.",
+   "tags": [
+    "Failure"
+   ],
+   "learn": [
+    {
+     "text": "What a missing line looks like",
+     "step": 1
+    },
+    {
+     "text": "What happens to the old page",
+     "step": 2
+    }
+   ],
+   "metrics": [
+    {
+     "id": "where",
+     "label": "Where it is"
+    },
+    {
+     "id": "written",
+     "label": "Page written"
+    },
+    {
+     "id": "result",
+     "label": "Result"
+    }
+   ],
+   "steps": [
+    {
+     "short": "Code moved",
+     "phase": "Problem",
+     "title": "The cited text is no longer in the file",
+     "body": "Someone renamed the function. The file opens, but no line contains the text the step cites.",
+     "focus": [
+      "scene",
+      "source",
+      "repo"
+     ],
+     "hops": [
+      {
+       "e": "scene-source",
+       "label": "step"
+      },
+      {
+       "e": "source-repo",
+       "label": "file and text"
+      },
+      {
+       "e": "source-repo",
+       "label": "not there",
+       "kind": "bad",
+       "r": 1
+      }
+     ],
+     "sources": [
+      {
+       "repo": "architecture-course",
+       "path": "skills/architecture-course/scripts/build_course.py",
+       "anchor": "anchor not found in"
+      }
+     ],
+     "metrics": {
+      "where": "Source check",
+      "written": "no",
+      "result": {
+       "v": "refused",
+       "tone": "bad"
+      }
+     },
+     "idea": {
+      "kind": "warn",
+      "text": "Reread the code before fixing the text. The step itself may now be wrong."
+     },
+     "changes": [
+      {
+       "op": "mod",
+       "text": "The cited code"
+      }
+     ],
+     "tags": {
+      "source": {
+       "t": "anchor not found",
+       "tone": "red"
+      }
+     }
+    },
+    {
+     "short": "Nothing written",
+     "phase": "Recap",
+     "title": "The build stops before it writes a page",
+     "body": "The check raises an error before the page is written, so the last good page is left as it was. The message names every step that failed.",
+     "focus": [
+      "source",
+      "render",
+      "page"
+     ],
+     "hops": [
+      {
+       "e": "source-render",
+       "kind": "bad",
+       "fail": 1
+      }
+     ],
+     "sources": [
+      {
+       "repo": "architecture-course",
+       "path": "skills/architecture-course/scripts/build_course.py",
+       "anchor": "cited = resolve_sources(course, repos)"
+      },
+      {
+       "repo": "architecture-course",
+       "path": "skills/architecture-course/scripts/build_course.py",
+       "anchor": "NOT BUILT"
+      }
+     ],
+     "metrics": {
+      "where": "Source check",
+      "written": "no",
+      "result": {
+       "v": "not built",
+       "tone": "bad"
+      }
+     },
+     "idea": {
+      "kind": "idea",
+      "text": "A missing citation is never just a warning."
+     },
+     "relabel": {
+      "page": {
+       "label": "index.html",
+       "sub": "last good page"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "undrawable",
+   "label": "When a step cannot be drawn",
+   "subtitle": "One wrong name stops the build.",
+   "tags": [
+    "Failure"
+   ],
+   "learn": [
+    {
+     "text": "Which names are checked",
+     "step": 1
+    },
+    {
+     "text": "How problems are reported",
+     "step": 2
+    }
+   ],
+   "metrics": [
+    {
+     "id": "where",
+     "label": "Where it is"
+    },
+    {
+     "id": "written",
+     "label": "Page written"
+    },
+    {
+     "id": "result",
+     "label": "Result"
+    }
+   ],
+   "steps": [
+    {
+     "short": "Bad name",
+     "phase": "Problem",
+     "title": "A step names a box that is not on the map",
+     "body": "The scene check compares every name with the map. One wrong letter is enough to be refused.",
+     "focus": [
+      "course",
+      "scene",
+      "source"
+     ],
+     "hops": [
+      {
+       "e": "course-scene",
+       "label": "typo"
+      },
+      {
+       "e": "scene-source",
+       "kind": "bad",
+       "fail": 1
+      }
+     ],
+     "sources": [
+      {
+       "repo": "architecture-course",
+       "path": "skills/architecture-course/scripts/build_course.py",
+       "anchor": "focus names unknown node"
+      }
+     ],
+     "metrics": {
+      "where": "Scene checks",
+      "written": "no",
+      "result": {
+       "v": "refused",
+       "tone": "bad"
+      }
+     },
+     "idea": {
+      "kind": "tip",
+      "text": "This check runs before any repository is opened."
+     },
+     "tags": {
+      "scene": {
+       "t": "unknown node",
+       "tone": "red"
+      }
+     }
+    },
+    {
+     "short": "All at once",
+     "phase": "Recap",
+     "title": "The author gets the whole list back",
+     "body": "Problems from every scene are gathered, then reported in one message.",
+     "focus": [
+      "author",
+      "course",
+      "scene"
+     ],
+     "hops": [
+      {
+       "e": "scene-author",
+       "label": "every problem",
+       "kind": "bad"
+      }
+     ],
+     "sources": [
+      {
+       "repo": "architecture-course",
+       "path": "skills/architecture-course/scripts/build_course.py",
+       "anchor": "raise CourseError(\"\\n\".join(bad))"
+      }
+     ],
+     "metrics": {
+      "where": "Author",
+      "written": "no",
+      "result": {
+       "v": "not built",
+       "tone": "bad"
+      }
+     },
+     "idea": {
+      "kind": "next",
+      "text": "Fix the list, then build again."
+     },
+     "changes": [
+      {
+       "op": "add",
+       "text": "A list of every problem"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

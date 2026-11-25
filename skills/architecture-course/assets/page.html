@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{INTRO}}">
+<meta name="generator" content="architecture-course 1.0.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500&display=swap">
+<style>{{CSS}}</style>
+<script>try{var t=(JSON.parse(localStorage.getItem('arch-course:{{ID}}')||'{}')).theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+<div class="app" id="app">
+  <header class="bar">
+    <button class="ctl menu" id="menu" type="button" aria-expanded="false" aria-controls="outline">Lessons</button>
+    <div class="brand"><span>{{TITLE}}</span></div>
+    <div class="find"><input id="q" type="search" placeholder="Search steps" aria-label="Search steps" autocomplete="off"><kbd>Ctrl K</kbd><div class="hits" id="hits" hidden></div></div>
+    <button class="ctl only-phone" id="find-btn" type="button">Search</button>
+    <button class="ctl" id="theme" type="button">Dark</button>
+    <button class="ctl hide-phone" id="about-btn" type="button">About</button>
+  </header>
+  <div class="cols">
+    <aside class="outline" id="outline" aria-label="Course outline">
+      <h2>Course <small id="count"></small></h2>
+      <nav class="tree" id="tree" aria-label="Lessons"></nav>
+      <div class="progress"><div>Progress <b id="pct"></b></div><span><i id="fill"></i></span></div>
+    </aside>
+    <main class="sheet">
+      <div class="head">
+        <div class="crumb" id="crumb"></div>
+        <div class="row"><h1 id="title">{{TITLE}}</h1><div class="tags" id="tags"></div></div>
+        <p class="sub" id="sub"></p>
+      </div>
+      <section class="stage" aria-label="Diagram">
+        <div class="stage-top">
+          <div class="chips" id="chips"></div>
+          <div class="tools">
+            <button class="ctl" id="replay" type="button">Replay</button>
+            <button class="ctl" id="pause" type="button">Pause</button>
+            <button class="ctl" id="full" type="button">Full screen</button>
+          </div>
+        </div>
+        <div class="canvas" id="canvas"></div>
+        <div class="legend" id="legend"></div>
+      </section>
+      <section class="timeline" aria-label="Steps in this lesson">
+        <div class="timeline-head">In this lesson <small id="tl-count"></small></div>
+        <ol class="track" id="track"></ol>
+      </section>
+    </main>
+    <aside class="rail" aria-label="Explanation">
+      <section class="box guide">
+        <div class="meta"><span id="stepno"></span><span class="phase" id="phase"></span></div>
+        <div aria-live="polite">
+          <h2 id="step-title"></h2>
+          <div class="text" id="text"></div>
+          <div class="note" id="note"><i id="note-i" aria-hidden="true"></i><div><b id="note-b"></b><p id="note-p"></p></div></div>
+        </div>
+        <div class="changes" id="changes"><div class="label">What changed</div><ul id="change-list"></ul></div>
+        <details class="src" id="src"><summary>Where this is in the code</summary><ul id="src-list"></ul></details>
+        <div class="nav"><button class="ctl" id="back" type="button">Back</button><button class="ctl main" id="next" type="button"><span id="next-label"></span></button></div>
+        <div class="keys"><kbd>&larr;</kbd> <kbd>&rarr;</kbd> step <kbd>R</kbd> replay <kbd>Space</kbd> pause <kbd>F</kbd> expand</div>
+      </section>
+      <section class="box goals" id="goals"><div class="label">You'll learn</div><ul id="goal-list"></ul></section>
+    </aside>
+  </div>
+  <div class="shade" id="shade" hidden></div>
+  <dialog id="about" aria-labelledby="about-title"><h2 id="about-title">About this course</h2>{{ABOUT}}<button class="ctl" id="about-close" type="button">Close</button></dialog>
+</div>
+<noscript>{{FALLBACK}}</noscript>
+<script>
+{{ENGINE}}</script>
+<script>
+{{PAGE}}</script>
+<script>window.course=window.ArchCourse.start({{DATA}});</script>
+</body>
+</html>

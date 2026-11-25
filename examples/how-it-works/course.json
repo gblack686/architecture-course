@@ -1,0 +1,18 @@
+{
+ "schema": "gbauto.architecture-course.v1",
+ "id": "how-it-works",
+ "title": "How an architecture course is built",
+ "intro": "An animated walk through how this skill turns a folder of JSON into a checked page.",
+ "home_repo": "architecture-course",
+ "chapters": [
+  {
+   "title": "How it works",
+   "tone": "terracotta",
+   "scene": "scenes/how-it-works.json"
+  }
+ ],
+ "about": [
+  "This course draws the order of events in the source code of architecture-course itself. It is not a recording of a run.",
+  "The checks prove that the page can be read and that each cited line exists. They do not prove that the explanation is right."
+ ]
+}
